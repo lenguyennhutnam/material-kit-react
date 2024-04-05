@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
+// import { useState } from 'react';
 import { faker } from '@faker-js/faker';
 
 import Container from '@mui/material/Container';
@@ -9,7 +10,7 @@ import Typography from '@mui/material/Typography';
 
 // import Iconify from 'src/components/iconify';
 
-import AppTasks from '../app-tasks';
+// import AppTasks from '../app-tasks';
 import AppNewsUpdate from '../app-news-update';
 import AppOrderTimeline from '../app-order-timeline';
 import AppCurrentVisits from '../app-current-visits';
@@ -174,20 +175,20 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppConversionRates
-            title="Conversion Rates"
-            subheader="(+43%) than last year"
+            title="Top 10 Web truy cập nhiều nhất"
+            subheader="(+43%) than last month"
             chart={{
               series: [
-                { label: 'Italy', value: 400 },
-                { label: 'Japan', value: 430 },
-                { label: 'China', value: 448 },
-                { label: 'Canada', value: 470 },
-                { label: 'France', value: 540 },
-                { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
-                { label: 'Netherlands', value: 1100 },
-                { label: 'United States', value: 1200 },
-                { label: 'United Kingdom', value: 1380 },
+                { label: 'VLXX.com', value: 400 },
+                { label: 'Gamevui.com', value: 430 },
+                { label: 'Truyensex.com', value: 448 },
+                { label: 'facebook.com', value: 470 },
+                { label: 'xlxx.com', value: 540 },
+                { label: 'Phimmoi.net', value: 580 },
+                { label: 'Youtube.com', value: 690 },
+                { label: 'Truyentranh.com', value: 1000 },
+                { label: '18+.net', value: 700 },
+                { label: 'Dovui.net', value: 500 },
               ],
             }}
           />
@@ -195,13 +196,13 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppCurrentSubject
-            title="Current Subject"
+            title="Tỷ lệ nội dung truy cập"
             chart={{
-              categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+              categories: ['Chơi Game', 'Xem Phim', 'Học Tập', 'Đọc truyện', 'Web Đồi Trụy', 'Nghe Nhạc'],
               series: [
-                { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-                { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-                { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
+                { name: 'Loại 1', data: [80, 50, 30, 40, 100, 20] },
+                { name: 'Loại 2', data: [20, 30, 40, 80, 20, 80] },
+                { name: 'Loại 3', data: [44, 76, 78, 13, 43, 10] },
               ],
             }}
           />
@@ -222,15 +223,15 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppOrderTimeline
-            title="Order Timeline"
+            title="Web truy cập mới nhất"
             list={[...Array(5)].map((_, index) => ({
               id: faker.string.uuid(),
               title: [
-                '1983, orders, $4220',
-                '12 Invoices have been paid',
-                'Order #37745 from September',
-                'New order placed #XF-2356',
-                'New order placed #XF-2346',
+                ' vlxx.com',
+                ' vlxx.com',
+                ' vlxx.com',
+                ' vlxx.com',
+                ' vlxx.com',
               ][index],
               type: `order${index + 1}`,
               time: faker.date.past(),
@@ -266,19 +267,19 @@ export default function AppView() {
           />
         </Grid> */}
 
-        <Grid xs={12} md={6} lg={8}>
+        {/* <Grid xs={12} md={6} lg={8}>
           <AppTasks
             title="Tasks"
             list={[
-              { id: '1', name: 'Create FireStone Logo' },
-              { id: '2', name: 'Add SCSS and JS files if required' },
-              { id: '3', name: 'Stakeholder Meeting' },
-              { id: '4', name: 'Scoping & Estimations' },
-              { id: '5', name: 'Sprint Showcase' },
+              // { id: '1', name: 'Create FireStone Logo' },
+              // { id: '2', name: 'Add SCSS and JS files if required' },
+              // { id: '3', name: 'Stakeholder Meeting' },
+              // { id: '4', name: 'Scoping & Estimations' }, 
+              // { id: '5', name: 'Sprint Showcase' },
             ]}
           />
-        </Grid>
-      </Grid>
+        </Grid> */}
+      </Grid> 
     </Container>
   );
 }

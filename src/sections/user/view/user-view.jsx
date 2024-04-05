@@ -97,10 +97,10 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">Users</Typography>
+        <Typography variant="h4">Thông tin người dùng</Typography>
 
         <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New User
+          Thêm người dùng mới
         </Button>
       </Stack>
 
@@ -122,11 +122,11 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'name', label: 'Họ và tên' },
+                  { id: 'company', label: 'Email người dùng ' },
+                  { id: 'role', label: 'Email giám sát' },
+                  { id: 'isVerified', label: 'Xác nhận', align: 'center' },
+                  { id: 'status', label: 'Trạng Thái' },
                   { id: '' },
                 ]}
               />

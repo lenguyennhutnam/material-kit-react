@@ -1,80 +1,99 @@
 import { sample } from 'lodash';
-import { faker } from '@faker-js/faker';
 
-// ----------------------------------------------------------------------
-
-const userName = [
-  'Đặng Mai Anh',
-  'Võ Hoàng Long',
-  'Lưu Cao Vĩnh Trinh',
-  'Đặng Nhật Phi',
-  'Dương Vĩnh Nghi',
-  'Nguyễn Tiến Dương',
-  'Cao Trung Kiên',
-  'Trần Bảo Minh',
-  'Huỳnh Hiển Bảo Yến',
-  'Nguyễn Vũ Minh Thư',
-  'Lê Vũ Trung',
-  'Phạm Hòa Chính',
-  'Nguyễn Hoàng Phi Hùng',
-  'Huỳnh Minh Quang',
-  'Đỗ Hoàng Khôi',
-  'Huỳnh Phạm Hồng Thủy',
-  'Nguyễn Hồng Viết',
-  'Nguyễn Hữu Tuấn',
-  'Huỳnh Trần Mỹ Hoàng',
-  'Bùi Phạm Tường Vi',
-  'Nguyễn Kim Trình',
-  'Nguyễn Phương Bảo Vy',
-  'Vũ Mạnh Cường',
-  'Trịnh Ngọc Lâm',
-  'Lý Thị Bé',
-  'Khổng Trung Hiếu',
-  'Vũ Huỳnh Nhật Hạ',
-  'Hoàng Long Vũ',
-  'Nguyễn Vũ Minh Thư',
-  'Nguyễn Thị Thu Liên',
-  'Nguyễn Minh Quang',
-  'Nguyễn Phan Ngọc Tuyên',
-  'Lê Châu Minh Nhi',
-  'Ngô Minh Nghĩa',
-  'Lê Văn Hoàn',
-  'Nguyễn Anh Phi',
-  'Phùng Thị Hạ Thi',
-  'Lý Thị Bé',
-  'Vương Thịnh Đạt',
-  'Lê Thị Tường Vy',
-  'Huỳnh Hiển Bảo Yến',
-  'Nguyễn Tiến Huy',
-  'Quách Trường An',
-  'Hồ Ngọc Hiệp',
-  'Trần Bá Vương',
-  'Nguyễn Bình Khang',
-  'Nguyễn Thị Ngọc Nga',
-  'Trần Trương Thu Thủy',
-  'Nguyễn Thảotuyết Nhi',
-  'Đỗ Hoàng Khôi',
-  'Võ Thị Minh Hậu',
-  'Trần Tuấn Anh',
+// Danh sách các tên người và công ty Việt Nam (bạn có thể mở rộng danh sách này)
+const vietnameseNames = [
+  "Nguyễn Văn Anh",
+  "Trần Thị Bình",
+  "Lê Văn Cương",
+  "Phạm Thị Dưỡng",
+  "Hoàng Văn Dương",
+  "Nguyễn Thị Lan",
+  "Trần Văn Hùng",
+  "Lê Thị Hương",
+  "Phạm Văn Tâm",
+  "Đặng Thị Mai",
+  "Nguyễn Thành Hưng",
+  "Trần Thị Hoa",
+  "Lê Văn Đạt",
+  "Phạm Thị Linh",
+  "Hoàng Thị Ngọc",
+  "Nguyễn Văn Bảo",
+  "Trần Thị Ngân",
+  "Lê Văn Hòa",
+  "Phạm Thị Loan",
+  "Đặng Văn Tuấn",
+  "Nguyễn Thị Thủy",
+  "Trần Văn Nam",
+  "Lê Thị Ngọc",
+  "Phạm Văn Lâm",
+  "Hoàng Văn Hùng",
+  // Thêm các tên người khác ở đây...
+];
+const vietnameseNames2 = [
+  "Nguyễn Thị Bình",
+  "Trần Bình lê",
+  "Lê Vũ Cường",
+  "Phạm Văn Cường",
+  "Hoàng Văn Dương",
+  "Nguyễn Thị Lan",
+  "Trần Văn Hùng",
+  "Lê Văn Hương",
+  "Phạm Văn Tâm",
+  "Đặng Thị Mai",
+  "Nguyễn Văn Hưng",
+  "Trần Văn Hoa",
+  "Lê Văn Đạt",
+  "Phạm Thị Linh",
+  "Hoàng Văn Ngọc",
+  "Nguyễn Văn Bảo",
+  "Trần Thị Ngân",
+  "Lê Thị Hòa",
+  "Phạm Thị Loan",
+  "Đặng Văn Tuấn",
+  "Nguyễn Thị Thủy",
+  "Trần Thị Nam",
+  "Lê Thị Ngọc",
+  "Phạm Thị Lâm",
+  "Hoàng Văn Hùng",
+  // Thêm các tên người khác ở đây...
 ];
 
-export const users = [...Array(24)].map((_, index) => ({
-  id: faker.string.uuid(),
-  avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
-  name: userName[index],
-  company: faker.company.name(),
-  isVerified: faker.datatype.boolean(),
-  status: sample(['active', 'banned']),
-  role: sample([
-    'Leader',
-    'Hr Manager',
-    'UI Designer',
-    'UX Designer',
-    'UI/UX Designer',
-    'Project Manager',
-    'Backend Developer',
-    'Full Stack Designer',
-    'Front End Developer',
-    'Full Stack Developer',
-  ]),
+
+// Hàm chuyển đổi tên người thành email
+const nameToEmail = (name) => {
+ 
+  const normalizedName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+ 
+  const [firstName, lastName] = normalizedName.split(" ");
+
+  const email = `${firstName}${lastName}@gmail.com`;
+  return email;
+};
+
+
+
+const usersWithEmails = vietnameseNames.map((name) => ({
+  name,
+  email: nameToEmail(name),
 }));
+
+usersWithEmails.sort((a, b) => (a.email > b.email ? 1 : -1));
+
+
+// Tạo mảng chứa các cặp email của người dùng và email của con tương ứng
+// Tạo danh sách email của người giám sát từ vietnameseNames2
+const supervisorEmails = vietnameseNames2.map(name => nameToEmail(name));
+
+// Tạo dữ liệu người dùng với email của người giám sát tương ứng
+export const users = usersWithEmails.map(({ name, email }, index) => {
+  const supervisorEmail = supervisorEmails[index];
+  return {
+    id: index + 1,
+    avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+    name,
+    company: email,
+    isVerified: Math.random() < 0.5,
+    status: sample(['active', 'banned']),
+    role: supervisorEmail,
+  };
+});
