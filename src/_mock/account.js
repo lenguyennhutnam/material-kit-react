@@ -1,7 +1,8 @@
 // ----------------------------------------------------------------------
 
 export const account = {
-  displayName: 'Jaydon Frankie',
-  email: 'demo@minimals.cc',
-  photoURL: '/assets/images/avatars/avatar_25.jpg',
+  displayName: 'Online kid protection',
+  email: 'onlinekidprotection@gmail.com',
+  photoURL: '/favicon/android-chrome-192x192.png',
+  // photoURL: '/assets/images/avatars/avatar_25.jpg',
 };

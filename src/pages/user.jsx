@@ -8,7 +8,7 @@ export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> User | Minimal UI </title>
+        <title> Danh sách người dùng </title>
       </Helmet>
 
       <UserView />

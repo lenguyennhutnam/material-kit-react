@@ -41,4 +41,5 @@ Scrollbar.propTypes = {
   sx: PropTypes.object,
 };
 
+
 export default memo(Scrollbar);

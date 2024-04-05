@@ -58,6 +58,9 @@ export const products = [...Array(24)].map((_, index) => {
       (setIndex === 4 && PRODUCT_COLOR.slice(3, 6)) ||
       (setIndex === 23 && PRODUCT_COLOR.slice(4, 6)) ||
       (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
+      
+
+
       PRODUCT_COLOR,
     status: sample(['sale', 'new', '', '']),
   };

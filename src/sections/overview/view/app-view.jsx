@@ -1,10 +1,13 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-unused-vars */
+/* eslint-disable prefer-const */
 import { faker } from '@faker-js/faker';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-import Iconify from 'src/components/iconify';
+// import Iconify from 'src/components/iconify';
 
 import AppTasks from '../app-tasks';
 import AppNewsUpdate from '../app-news-update';
@@ -12,24 +15,71 @@ import AppOrderTimeline from '../app-order-timeline';
 import AppCurrentVisits from '../app-current-visits';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
-import AppTrafficBySite from '../app-traffic-by-site';
+// import AppTrafficBySite from '../app-traffic-by-site';
 import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
 // ----------------------------------------------------------------------
+function randomArray(length, min, max) {
+  let res = [];
+  for (let i = 0; i < length; i++) {
+    res.push(Math.floor(Math.random() * (max - min + 1)) + min);
+  }
+  return res;
+}
 
+
+const contentLabel = ['Chống phá Đảng', 'Phân biệt chủng tộc', 'Phân biệt giới tính', 'Người lớn (18+)'];
+const lineChartData = [
+  randomArray(11, 15, 70),
+  randomArray(11, 30, 50),
+  randomArray(11, 20, 80),
+  randomArray(11, 30, 100),
+];
+const contents = [
+  { name: 'Chống phá Đảng', value: lineChartData[0].reduce((total, current) => total + current, 0) },
+  {
+    name: 'Phân biệt chủng tộc',
+    value: lineChartData[1].reduce((total, current) => total + current, 0),
+  },
+  {
+    name: 'Phân biệt giới tính',
+    value: lineChartData[2].reduce((total, current) => total + current, 0),
+  },
+  {
+    name: 'Người lớn (18+)',
+    value: lineChartData[3].reduce((total, current) => total + current, 0),
+  },
+];
+function splitNumberRandomly(originalNumber, number) {
+  let splitNumbers = [];
+
+  // Generate four random numbers
+  for (let i = 0; i < number; i++) {
+    let randomNumber = Math.floor(Math.random() * originalNumber);
+    splitNumbers.push(randomNumber);
+    originalNumber -= randomNumber;
+  }
+
+  // The fifth number is whatever remains to ensure the sum remains unchanged
+  splitNumbers.push(originalNumber);
+
+  return splitNumbers;
+}
+
+// ----------------------------------------------------------------------
 export default function AppView() {
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back 👋
+        Thống kê nội dung độc hại
       </Typography>
 
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Weekly Sales"
-            total={714000}
+            title={contents[0].name}
+            total={contents[0].value}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
           />
@@ -37,8 +87,8 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="New Users"
-            total={1352831}
+            title={contents[1].name}
+            total={contents[1].value}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
           />
@@ -46,8 +96,8 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Item Orders"
-            total={1723315}
+            title={contents[2].name}
+            total={contents[2].value}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
           />
@@ -55,8 +105,8 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Bug Reports"
-            total={234}
+            title={contents[3].name}
+            total={contents[3].value}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
           />
@@ -64,37 +114,42 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppWebsiteVisits
-            title="Website Visits"
-            subheader="(+43%) than last year"
             chart={{
               labels: [
-                '01/01/2003',
-                '02/01/2003',
-                '03/01/2003',
-                '04/01/2003',
-                '05/01/2003',
-                '06/01/2003',
-                '07/01/2003',
-                '08/01/2003',
-                '09/01/2003',
-                '10/01/2003',
-                '11/01/2003',
+                '04/01/2023',
+                '05/01/2023',
+                '06/01/2023',
+                '07/01/2023',
+                '08/01/2023',
+                '09/01/2023',
+                '10/01/2023',
+                '11/01/2023',
+                '12/01/2023',
+                '01/01/2024',
+                '02/01/2024',
+                '03/01/2024',
               ],
               series: [
                 {
-                  name: 'Team A',
-                  type: 'column',
+                  name: 'Chống phá Đảng',
+                  type: 'line',
                   fill: 'solid',
-                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                  data: [24, 35, 46, 67, 42, 45, 56, 41, 56, 27, 43],
                 },
                 {
-                  name: 'Team B',
-                  type: 'area',
-                  fill: 'gradient',
+                  name: 'Phân biệt chủng tộc',
+                  type: 'line',
+                  fill: 'solid',
                   data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
                 },
                 {
-                  name: 'Team C',
+                  name: 'Phân biệt giới tính',
+                  type: 'line',
+                  fill: 'solid',
+                  data: [10, 45, 26, 33, 41, 35, 64, 52, 59, 36, 39],
+                },
+                {
+                  name: 'Người lớn (18+)',
                   type: 'line',
                   fill: 'solid',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
@@ -106,13 +161,12 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppCurrentVisits
-            title="Current Visits"
             chart={{
               series: [
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
+                { label: contents[0].name, value: contents[0].value },
+                { label: contents[1].name, value: contents[1].value },
+                { label: contents[2].name, value: contents[2].value },
+                { label: contents[3].name, value: contents[3].value },
               ],
             }}
           />
@@ -155,7 +209,7 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
-            title="News Update"
+            title="Người dùng vừa đăng ký"
             list={[...Array(5)].map((_, index) => ({
               id: faker.string.uuid(),
               title: faker.person.jobTitle(),
@@ -184,7 +238,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        {/* <Grid xs={12} md={6} lg={4}>
           <AppTrafficBySite
             title="Traffic by Site"
             list={[
@@ -210,7 +264,7 @@ export default function AppView() {
               },
             ]}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid xs={12} md={6} lg={8}>
           <AppTasks
