@@ -30,12 +30,13 @@ function randomArray(length, min, max) {
 }
 
 
-const contentLabel = ['Chống phá Đảng', 'Phân biệt chủng tộc', 'Phân biệt giới tính', 'Người lớn (18+)'];
+const contentLabel = ['Chống phá Đảng', 'Phân biệt chủng tộc', 'Phân biệt giới tính', 'Người lớn (18+)','Bạo lực'];
 const lineChartData = [
   randomArray(11, 15, 70),
   randomArray(11, 30, 50),
   randomArray(11, 20, 80),
   randomArray(11, 30, 100),
+  randomArray(11, 30, 200),
 ];
 const contents = [
   { name: 'Chống phá Đảng', value: lineChartData[0].reduce((total, current) => total + current, 0) },
@@ -50,6 +51,10 @@ const contents = [
   {
     name: 'Người lớn (18+)',
     value: lineChartData[3].reduce((total, current) => total + current, 0),
+  },
+  {
+    name: 'Bạo lực',
+    value: lineChartData[4].reduce((total, current) => total + current, 0),
   },
 ];
 function splitNumberRandomly(originalNumber, number) {
@@ -77,7 +82,7 @@ export default function AppView() {
       </Typography>
 
       <Grid container spacing={3}>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={4}>
           <AppWidgetSummary
             title={contents[0].name}
             total={contents[0].value}
@@ -86,7 +91,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={4}>
           <AppWidgetSummary
             title={contents[1].name}
             total={contents[1].value}
@@ -95,7 +100,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={4}>
           <AppWidgetSummary
             title={contents[2].name}
             total={contents[2].value}
@@ -104,12 +109,20 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={4}>
           <AppWidgetSummary
             title={contents[3].name}
             total={contents[3].value}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+          />
+        </Grid>
+        <Grid xs={12} sm={6} md={4}>
+          <AppWidgetSummary
+            title={contents[4].name}
+            total={contents[4].value}
+            color="error"
+            icon={<img alt="icon" src="/assets/icons/glass/ic_glass_baoluc.png" />}
           />
         </Grid>
 
@@ -126,7 +139,7 @@ export default function AppView() {
                 '10/01/2023',
                 '11/01/2023',
                 '12/01/2023',
-                '01/01/2024',
+                '01/09/2024',
                 '02/01/2024',
                 '03/01/2024',
               ],
@@ -155,12 +168,18 @@ export default function AppView() {
                   fill: 'solid',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
                 },
+                {
+                  name: 'Bạo lực',
+                  type: 'line',
+                  fill: 'solid',
+                  data: [30, 25, 36, 30, 41, 35, 64, 52, 59, 36, 39 ],
+                },
               ],
             }}
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={1} md={1} lg={4}>
           <AppCurrentVisits
             chart={{
               series: [
@@ -168,6 +187,7 @@ export default function AppView() {
                 { label: contents[1].name, value: contents[1].value },
                 { label: contents[2].name, value: contents[2].value },
                 { label: contents[3].name, value: contents[3].value },
+                { label: contents[4].name, value: contents[4].value },
               ],
             }}
           />
