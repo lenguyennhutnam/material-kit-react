@@ -83,17 +83,29 @@ usersWithEmails.sort((a, b) => (a.email > b.email ? 1 : -1));
 // Tạo mảng chứa các cặp email của người dùng và email của con tương ứng
 // Tạo danh sách email của người giám sát từ vietnameseNames2
 const supervisorEmails = vietnameseNames2.map(name => nameToEmail(name));
-
+const mapStatusToColor = (status) => {
+  switch (status) {
+    case 'active':
+      return 'success'; // Màu xanh cho trạng thái active
+    case 'deactive':
+    case 'banned':
+      return 'error'; // Màu đỏ cho trạng thái deactive và banned
+    default:
+      return 'text.primary';
+  }
+};
 // Tạo dữ liệu người dùng với email của người giám sát tương ứng
 export const users = usersWithEmails.map(({ name, email }, index) => {
   const supervisorEmail = supervisorEmails[index];
+  const status = sample(['active', 'deactive']);
   return {
     id: index + 1,
     avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
     name,
     company: email,
     isVerified: Math.random() < 0.5,
-    status: sample(['active', 'banned']),
+    status: sample(['Active', 'Active']),
     role: supervisorEmail,
+    color: mapStatusToColor(status),
   };
 });

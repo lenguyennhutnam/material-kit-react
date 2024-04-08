@@ -20,6 +20,12 @@ import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
+
+
+// Thêm hàm lấy ngẫu nhiên một người dùng từ mảng
+
+
+
 // ----------------------------------------------------------------------
 function randomArray(length, min, max) {
   let res = [];
@@ -75,6 +81,26 @@ function splitNumberRandomly(originalNumber, number) {
 
 // ----------------------------------------------------------------------
 export default function AppView() {
+
+  const vietnameseNames = [
+    'Nguyễn Văn An',
+    'Trần Thị Bình',
+    'Lê Văn Cường',
+    'Phạm Thị Dung',
+    'Hoàng Văn Em',
+    'Nguyễn Thị Nhung',
+    'Trần Văn Giang',
+    'Lê Thị Hà',
+    'Phạm Văn Tú',
+    'Hoàng Thị Thắm',
+  ];
+  const vietnameseUsers = vietnameseNames.map((name, index) => ({
+    id: index + 1,
+    title: name,
+    description: `${name.split(' ')[1].toLowerCase()}@example.com`, // Email sẽ lấy phần họ của tên và ghép với domain example.com
+    image: `/assets/images/avatars/avatar_${index + 1}.jpg`, // Hình ảnh (đã có sẵn)
+    postedAt: faker.date.recent(), // Ngày đăng ký (tạo ngẫu nhiên)
+  }));
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
@@ -227,17 +253,20 @@ export default function AppView() {
             }}
           />
         </Grid>
-
+            
         <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
             title="Người dùng vừa đăng ký"
-            list={[...Array(5)].map((_, index) => ({
-              id: faker.string.uuid(),
-              title: faker.person.jobTitle(),
-              description: faker.commerce.productDescription(),
-              image: `/assets/images/covers/cover_${index + 1}.jpg`,
-              postedAt: faker.date.recent(),
-            }))}
+            list={vietnameseUsers}
+            // list={[...Array(5)].map((_, index) => ({
+
+              // id: faker.string.uuid(),
+              // title: faker.person.jobTitle(),
+              // description: faker.commerce.productDescription(),
+              // image: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+              // postedAt: faker.date.recent(),
+              
+            // }))}
           />
         </Grid>
 
@@ -248,10 +277,10 @@ export default function AppView() {
               id: faker.string.uuid(),
               title: [
                 ' vlxx.com',
-                ' vlxx.com',
-                ' vlxx.com',
-                ' vlxx.com',
-                ' vlxx.com',
+                ' truyensex.com',
+                ' 18+.com',
+                ' hentai.com',
+                ' vietan.com',
               ][index],
               type: `order${index + 1}`,
               time: faker.date.past(),
