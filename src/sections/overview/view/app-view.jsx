@@ -20,11 +20,7 @@ import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
-
-
 // Thêm hàm lấy ngẫu nhiên một người dùng từ mảng
-
-
 
 // ----------------------------------------------------------------------
 function randomArray(length, min, max) {
@@ -35,17 +31,25 @@ function randomArray(length, min, max) {
   return res;
 }
 
-
-const contentLabel = ['Chống phá Đảng', 'Phân biệt chủng tộc', 'Phân biệt giới tính', 'Người lớn (18+)','Bạo lực'];
+const contentLabel = [
+  'Chống phá Đảng',
+  'Phân biệt chủng tộc',
+  'Phân biệt giới tính',
+  'Người lớn (18+)',
+  'Bạo lực',
+];
 const lineChartData = [
   randomArray(11, 15, 70),
   randomArray(11, 30, 50),
   randomArray(11, 20, 80),
   randomArray(11, 30, 100),
-  randomArray(11, 30, 200),
+  randomArray(11, 40, 110),
 ];
 const contents = [
-  { name: 'Chống phá Đảng', value: lineChartData[0].reduce((total, current) => total + current, 0) },
+  {
+    name: 'Chống phá Đảng',
+    value: lineChartData[0].reduce((total, current) => total + current, 0),
+  },
   {
     name: 'Phân biệt chủng tộc',
     value: lineChartData[1].reduce((total, current) => total + current, 0),
@@ -80,8 +84,23 @@ function splitNumberRandomly(originalNumber, number) {
 }
 
 // ----------------------------------------------------------------------
-export default function AppView() {
+function setMail(str) {
+  const accentuatedChars =
+    'àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴĐ';
+  const unaccentuatedChars =
+    'aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyydAAAAAAAAAAAAAAAAAEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYYD';
 
+  const charMap = {};
+  for (let i = 0; i < accentuatedChars.length; i++) {
+    charMap[accentuatedChars.charAt(i)] = unaccentuatedChars.charAt(i);
+  }
+
+  return str
+    .split('')
+    .map((char) => charMap[char] || char)
+    .join('');
+}
+export default function AppView() {
   const vietnameseNames = [
     'Nguyễn Văn An',
     'Trần Thị Bình',
@@ -97,7 +116,7 @@ export default function AppView() {
   const vietnameseUsers = vietnameseNames.map((name, index) => ({
     id: index + 1,
     title: name,
-    description: `${name.split(' ')[1].toLowerCase()}@example.com`, // Email sẽ lấy phần họ của tên và ghép với domain example.com
+    description: `${setMail(name.split(' ')[2] + name.split(' ')[0] + name.split(' ')[1]).toLowerCase()}@gmail.com`, // Email sẽ lấy phần họ của tên và ghép với domain example.com
     image: `/assets/images/avatars/avatar_${index + 1}.jpg`, // Hình ảnh (đã có sẵn)
     postedAt: faker.date.recent(), // Ngày đăng ký (tạo ngẫu nhiên)
   }));
@@ -174,31 +193,31 @@ export default function AppView() {
                   name: 'Chống phá Đảng',
                   type: 'line',
                   fill: 'solid',
-                  data: [24, 35, 46, 67, 42, 45, 56, 41, 56, 27, 43],
+                  data: lineChartData[0],
                 },
                 {
                   name: 'Phân biệt chủng tộc',
                   type: 'line',
                   fill: 'solid',
-                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                  data: lineChartData[1],
                 },
                 {
                   name: 'Phân biệt giới tính',
                   type: 'line',
                   fill: 'solid',
-                  data: [10, 45, 26, 33, 41, 35, 64, 52, 59, 36, 39],
+                  data: lineChartData[2],
                 },
                 {
                   name: 'Người lớn (18+)',
                   type: 'line',
                   fill: 'solid',
-                  data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
+                  data: lineChartData[3],
                 },
                 {
                   name: 'Bạo lực',
                   type: 'line',
                   fill: 'solid',
-                  data: [30, 25, 36, 30, 41, 35, 64, 52, 59, 36, 39 ],
+                  data: lineChartData[4],
                 },
               ],
             }}
@@ -225,14 +244,14 @@ export default function AppView() {
             subheader="(+43%) than last month"
             chart={{
               series: [
-                { label: 'VLXX.com', value: 400 },
+                { label: 'nettruyen.com', value: 400 },
                 { label: 'Gamevui.com', value: 430 },
                 { label: 'Truyensex.com', value: 448 },
                 { label: 'facebook.com', value: 470 },
                 { label: 'xlxx.com', value: 540 },
                 { label: 'Phimmoi.net', value: 580 },
                 { label: 'Youtube.com', value: 690 },
-                { label: 'Truyentranh.com', value: 1000 },
+                { label: 'Truyentranh.com', value: 780 },
                 { label: '18+.net', value: 700 },
                 { label: 'Dovui.net', value: 500 },
               ],
@@ -244,7 +263,14 @@ export default function AppView() {
           <AppCurrentSubject
             title="Tỷ lệ nội dung truy cập"
             chart={{
-              categories: ['Chơi Game', 'Xem Phim', 'Học Tập', 'Đọc truyện', 'Web Đồi Trụy', 'Nghe Nhạc'],
+              categories: [
+                'Chơi Game',
+                'Xem Phim',
+                'Học Tập',
+                'Đọc truyện',
+                'Web Đồi Trụy',
+                'Nghe Nhạc',
+              ],
               series: [
                 { name: 'Loại 1', data: [80, 50, 30, 40, 100, 20] },
                 { name: 'Loại 2', data: [20, 30, 40, 80, 20, 80] },
@@ -253,19 +279,19 @@ export default function AppView() {
             }}
           />
         </Grid>
-            
+
         <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
             title="Người dùng vừa đăng ký"
             list={vietnameseUsers}
             // list={[...Array(5)].map((_, index) => ({
 
-              // id: faker.string.uuid(),
-              // title: faker.person.jobTitle(),
-              // description: faker.commerce.productDescription(),
-              // image: `/assets/images/avatars/avatar_${index + 1}.jpg`,
-              // postedAt: faker.date.recent(),
-              
+            // id: faker.string.uuid(),
+            // title: faker.person.jobTitle(),
+            // description: faker.commerce.productDescription(),
+            // image: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+            // postedAt: faker.date.recent(),
+
             // }))}
           />
         </Grid>
@@ -275,13 +301,9 @@ export default function AppView() {
             title="Web truy cập mới nhất"
             list={[...Array(5)].map((_, index) => ({
               id: faker.string.uuid(),
-              title: [
-                ' vlxx.com',
-                ' truyensex.com',
-                ' 18+.com',
-                ' hentai.com',
-                ' vietan.com',
-              ][index],
+              title: [' vlxx.com', ' truyensex.com', ' 18plus.com', ' hentai.com', ' vietan.com'][
+                index
+              ],
               type: `order${index + 1}`,
               time: faker.date.past(),
             }))}
@@ -328,7 +350,7 @@ export default function AppView() {
             ]}
           />
         </Grid> */}
-      </Grid> 
+      </Grid>
     </Container>
   );
 }
