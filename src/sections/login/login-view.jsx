@@ -29,8 +29,16 @@ export default function LoginView() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
-    router.push('/dashboard');
+    router.push('/');
   };
+
+  // RESTORE DATABASE ONLINEKIDPROTECTION
+  // FROM DISK = '/var/opt/mssql/backup/ONLINEKIDPROTECTION.bak'
+  // WITH MOVE 'ONLINEKIDPROTECTION_Data' TO '/var/opt/mssql/data/ONLINEKIDPROTECTION.mdf',
+  // MOVE 'ONLINEKIDPROTECTION_Log' TO '/var/opt/mssql/data/ONLINEKIDPROTECTION_Log.ldf'
+  // GO
+
+  // ALTER DATABASE ONLINEKIDPROTECTION MODIFY NAME = OnlKP;
 
   const renderForm = (
     <>
